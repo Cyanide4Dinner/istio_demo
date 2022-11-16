@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./";
+
+message MultRequest {
+	uint64 a = 1;
+	uint64 b = 2;
+}
+
+message MultResponse {
+	uint64 result = 1;
+}
+
+message ValidateRequest {
+	uint64 a = 1;
+	uint64 b = 2;
+	uint64 c = 3;
+}
+
+message ValidateResponse {
+	bool valid = 1;
+}
+
+service MultService {
+	rpc Compute (MultRequest) returns (MultResponse) {}
+	rpc Validate (ValidateRequest) returns (ValidateResponse) {}
+}

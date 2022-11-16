@@ -1,0 +1,11 @@
+FROM golang:1.16-alpine
+
+RUN mkdir /grpc-istio
+ADD . /grpc-istio
+WORKDIR /grpc-istio
+RUN go mod download
+RUN cd mult && go build .
+
+EXPOSE 3000
+
+CMD ["/grpc-istio/mult/mult"]

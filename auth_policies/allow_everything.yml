@@ -1,0 +1,32 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-everything
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: grpc-istio-mult
+  action: ALLOW
+  rules:
+    - from:
+      - source:
+          requestPrincipals: ["nurture.farm/123456789"]
+      to:
+        - operation:
+            methods: ["POST"]
+            paths: ["/pb.MultService/Compute"]
+      when:
+      - key: request.headers[actor_type]
+        values: ["farmer", "retail"]
+        key: request.auth.claims[math_operation]
+        values: ["mult"]
+        key: request.auth.claims[operands_number]
+        values: ["t*"]
+    - when:
+      - key: request.headers[actor_type]
+        values: ["xyz"]
+      to:
+        - operation:
+            methods: ["POST"]
+            paths: ["/pb.MultService/Validate"]

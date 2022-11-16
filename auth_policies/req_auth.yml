@@ -1,0 +1,23 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: req-auth
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: grpc-istio-mult
+  jwtRules:
+  - issuer: "nurture.farm"
+    jwks: '{
+      "keys": [
+        {
+              "kty": "RSA",
+                  "e": "AQAB",
+                      "use": "sig",
+                          "kid": "sig-2022-06-07T05:30:02Z",
+                              "alg": "RS256",
+                                  "n": "jz2ZTLKH2nzYPaOeC5UbcKjc2DonNkx_uJzHqIOhDPPvnf-UzJDl66TwPlDlobXFX1gmes16eL5Uyx6MmMfgRNgneZfiScVHUvdAbJDC767eB7HaZxHMGnRQB1jigazLiCjGEr5AiVnU0ZVsZ33Ng6-tUJ1DIh92w3BmBcDp-teqjNRPLy_NQ6pcnoACxLGyhx4iInntGPQRJf8cK5r3RfniiBsUhS4QEK48SQobYsF27ZmJSHy0YbnUB94X6c1WEkuFo6gj7g8N6mK8aezpHNAp-iJqnpN7xcgu38D8ehdGrvDYfdPtMiN1n_yY_ddWym9pIB4k7xTYBNbyuH_G4Q"
+                              }
+      ]
+}'

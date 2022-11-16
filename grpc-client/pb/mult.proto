@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./";
+
+message MultRequest {
+	uint64 a = 1;
+	uint64 b = 2;
+}
+
+message MultResponse {
+	uint64 result = 1;
+}
+
+service MultService {
+	rpc Compute (MultRequest) returns (MultResponse) {}
+}

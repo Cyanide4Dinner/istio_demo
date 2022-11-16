@@ -1,0 +1,12 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-nothing-grpc
+  namespace: default
+spec:
+  action: DENY
+  rules:
+    - to:
+      - operation:
+          methods: ["POST"]
+          paths: ["/pb.MultService/Compute"]
